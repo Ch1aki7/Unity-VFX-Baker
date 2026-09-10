@@ -4,6 +4,10 @@
 
 该工具适合将复杂粒子特效转换为成本更稳定的网格动画，减少运行时粒子模拟开销。支持完整特效烘焙，也支持把多个叶子粒子节点手动合并为若干独立分组 Prefab。
 
+![](docs/images/IMG-20260910102529458.gif)
+
+![](docs/images/IMG-20260910105820666.gif)
+
 ## 主要功能
 
 - 自动创建临时正交相机，不需要手动指定相机或 Pivot。
@@ -45,61 +49,6 @@ Unity 完成脚本编译后，通过以下菜单打开工具：
 Tools > VFX > VFX Prefab Baker
 ```
 
-## 文档图片
-
-GitHub 文档图片统一放在仓库根目录的 `docs/images/` 下，不要放入工具运行时的 `Editor`、`Runtime` 或 `Shaders` 目录。
-
-推荐结构：
-
-```text
-VFXBaker/
-├─ README.md
-├─ docs/
-│  └─ images/
-│     ├─ baker-window.png
-│     ├─ group-settings.png
-│     ├─ before-after.png
-│     └─ playback.gif
-├─ Editor/
-├─ Runtime/
-└─ Shaders/
-```
-
-在本 README 中使用相对于 `README.md` 的路径：
-
-```markdown
-![VFX Baker 窗口](docs/images/baker-window.png)
-
-![分组设置](docs/images/group-settings.png)
-
-![烘焙前后对比](docs/images/before-after.png)
-```
-
-需要控制显示宽度时，可以使用 HTML：
-
-```html
-<p align="center">
-  <img src="docs/images/baker-window.png" alt="VFX Baker 窗口" width="720">
-</p>
-```
-
-并排展示源特效和烘焙结果：
-
-```html
-<table>
-  <tr>
-    <th>源粒子特效</th>
-    <th>烘焙结果</th>
-  </tr>
-  <tr>
-    <td><img src="docs/images/source-vfx.gif" alt="源粒子特效"></td>
-    <td><img src="docs/images/baked-vfx.gif" alt="烘焙结果"></td>
-  </tr>
-</table>
-```
-
-文件名建议使用小写英文、数字和连字符，例如 `group-settings.png`，避免空格、中文文件名和本地绝对路径。GitHub README 中不要写 `C:\...` 或 `D:\...` 路径。
-
 ## 基本使用
 
 1. 将包含 `ParticleSystem` 的 Prefab 或场景对象拖入 `Source Effect`。
@@ -107,6 +56,8 @@ VFXBaker/
 3. 如需把整个特效烘焙为一个结果，保持 `Bake Child Groups` 关闭。
 4. 点击 `Bake Effect`。
 5. 烘焙结果生成在 `Assets/BakedVFX/<特效名>_Baked/`。
+
+![](docs/images/IMG-20260909174503456.png)
 
 ### 单帧尺寸
 
@@ -182,6 +133,8 @@ Assets/BakedVFX/Effect_A_Baked/
 ├─ <组名>.prefab
 └─ Effect_A_Baked.prefab
 ```
+
+![](docs/images/IMG-20260909174929679.png)
 
 共享 Quad 位于：
 
@@ -342,9 +295,3 @@ Runtime/BakedVFXPlayer.cs
 Shaders/BakedParticleAtlas.shader
     AnimTexture 解码、Atlas 采样、Straight Alpha 混合和 Billboard 顶点变换。
 ```
-
-## 发布前建议
-
-- 根据项目需要添加开源许可证文件。
-- 补充烘焙窗口、源特效和烘焙结果的对比截图。
-- 在目标 Unity 版本和渲染管线上执行一次完整回归测试。
